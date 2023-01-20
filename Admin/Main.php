@@ -2,15 +2,8 @@
 
 session_start();
 
-if(!isset($_SESSION['usuario'])){
-
-    header("Location:../Login.php");
-
-}else{
-
-    if($_SESSION['usuario']=="ok"){
-        $nombreUsuario=$_SESSION["nombreUsuario"];
-    }
+if(!isset($_SESSION['username'])){
+    header('Location: Login.php');
 }
 
 ?>

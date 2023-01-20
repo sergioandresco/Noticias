@@ -1,18 +1,49 @@
 <?php
 
+include "DB/Connection.php";
 session_start();
+error_reporting(0);
 
-if($_POST){
-    if(($_POST['usuario']=="admin")&&($_POST['contrasenia']=="123")){
-
-        $_SESSION['usuario']="ok";
-        $_SESSION['nombreUsuario']="USER";
-        header('Location:Main.php');
-    }else{
-        $mensaje= "Error: El usuario o contraseña son incorrectos";
-    }
-
+/** 
+if(isset($_SESSION["usuario"])){
+    header('Location: Main.php');
 }
+
+if(isset($_POST["submit"])){
+    $usuario=$_POST["usuario"];
+    $contrasenia=md5($_POST["contrasenia"]);
+
+    $sql = "SELECT * FROM usuarios WHERE nom_usuario='$usuario' AND contrasenia='$contrasenia'";
+    $result = mysqli_query($conexion, $sql);
+
+    if($result->num_rows > 0){
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['usuario'] = $row['usuario'];
+        header('Location: Main.php');
+    }else{
+        echo '<div class="alert">La contraseña es incorrecta</div>';
+        header('Location: Login.php');
+    }
+}
+*/
+$usuario=$_POST["usuario"];
+$contrasenia=md5($_POST["contrasenia"]);
+
+if(isset($_POST["submit"])){
+    $queryusuario = mysqli_query($conexion, "SELECT * FROM login WHERE nom_usuario = '$usuario'");
+    $nr = mysqli_num_rows($queryusuario);
+    $buscarpass = mysqli_fetch_array($queryusuario);
+
+    if($result->num_rows > 0){
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['usuario'] = $row['usuario'];
+        header('Location: Main.php');
+    }else{
+        echo '<div class="alert">La contraseña es incorrecta</div>';
+        header('Location: Login.php');
+    }
+}
+        
 
 ?>
 
@@ -48,14 +79,6 @@ if($_POST){
                 </div>
                 <div class="card-body">
 
-                    <?php if(isset($mensaje)){ ?>
-
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo $mensaje; ?>
-                    </div>
-
-                    <?php } ?>
-
                     <form method="POST">
 
                     <div class = "form-group">
@@ -73,8 +96,8 @@ if($_POST){
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                    <a href="Registration.php" class="btn btn-primary">Sign up</a>
+                    <button type="submit" class="btn btn-primary" name="submit">Log in</button>
+                    <a href="./Registration.php" class="btn btn-primary">Sign up</a>
 
                     </form>
 

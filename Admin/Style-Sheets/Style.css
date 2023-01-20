@@ -421,6 +421,16 @@ body{
     width: 30px;
 }
 
+.alert{
+    text-align: center;
+    color: red;
+}
+
+.success{
+    text-align: center;
+    color: green;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width:800px){

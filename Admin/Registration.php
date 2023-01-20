@@ -1,3 +1,46 @@
+<?php
+
+include "DB/Connection.php";
+error_reporting(0);
+session_start();
+
+if(!isset($_SESSION['usuario'])){
+
+    //header("Location: Main.php");
+
+}
+
+if(isset($_POST["registro"])){
+
+    $nombre=$_POST["nombre"];
+    $correo=$_POST["correo"];
+    $usuario=$_POST["usuario"];
+    $contrasenia=md5($_POST["contrasenia"]);
+    $sql = "SELECT * FROM usuarios WHERE correo='$correo'";
+    $result = mysqli_query($conexion, $sql);
+    
+    if(!$result->num_rows > 0){
+        $sql = "INSERT INTO usuarios(nombre, correo, nom_usuario, contrasenia) VALUES ('$nombre','$correo','$usuario','$contrasenia')";
+        $result = mysqli_query($conexion,$sql);
+
+        if($result){
+            echo '<div class="success">Usuario registrado correctamente</div>';
+            $nombre="";
+            $correo="";
+            $usuario="";
+            $_POST["contrasenia"]="";
+        }else{
+            echo '<div class="alert">Hay un error</div>';
+        }
+    }else{
+        echo '<div class="alert">El correo ya existe</div>';
+    }
+  
+}
+
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,6 +58,7 @@
   <div class="container__fondo">
 
     <div class="container">
+        <form action="" method="POST" class="formulario">
         <div class="row">
 
         <div class="col-md-4">
@@ -30,24 +74,14 @@
                 </div>
                 <div class="card-body">
 
-                    <?php if(isset($mensaje)){ ?>
-
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo $mensaje; ?>
-                    </div>
-
-                    <?php } ?>
-
-                    <form method="POST">
-
                     <div class = "form-group">
                     <label>Full Name</label>
-                    <input type="text" class="form-control" name="usuario" placeholder="Write your full name">
+                    <input type="text" class="form-control" name="nombre" placeholder="Write your full name">
                     </div>
 
                     <div class = "form-group">
                     <label>E-mail</label>
-                    <input type="text" class="form-control" name="usuario" placeholder="Write your e-mail">
+                    <input type="text" class="form-control" name="correo" placeholder="Write your e-mail">
                     </div>
 
                     <div class = "form-group">
@@ -60,23 +94,21 @@
                     <input type="password" class="form-control" name="contrasenia" placeholder="Enter your password">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Sign up</button>
+                    <button type="submit" class="btn btn-primary" value="Registrar" name="registro">Sign up</button>
+                    <a href="./Login.php" class="btn btn-primary">Log in</a>
 
-                    </form>
+                        </div>
 
-
+                    </div>
 
                 </div>
 
             </div>
-
-            </div>
-
+            </form>
         </div>
-    </div>
 
     </div>
 
 
-  </body>
+</body>
 </html>

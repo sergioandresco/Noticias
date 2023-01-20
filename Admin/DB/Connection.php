@@ -1,16 +1,14 @@
 <?php
 
 $host="localhost";
-$bd="serchblog";
 $usuario="root";
+$bd="noticenter";
 $contrasenia="";
 
-try {
-    $conexion=new PDO("mysql:host=$host;dbname=$bd",$usuario,$contrasenia);
+$conexion= mysqli_connect($host,$usuario,$contrasenia,$bd);
 
-} catch ( Exception $ex) {
-
-    echo $x->getMessage();
+if(!$conexion){
+    die("Conexión fallida");
 }
 
 ?>
