@@ -1,21 +1,3 @@
-<?php
-
-session_start();
-
-if($_POST){
-    if(($_POST['usuario']=="admin")&&($_POST['contrasenia']=="123")){
-
-        $_SESSION['usuario']="ok";
-        $_SESSION['nombreUsuario']="USER";
-        header('Location:Main.php');
-    }else{
-        $mensaje= "Error: El usuario o contraseña son incorrectos";
-    }
-
-}
-
-?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -44,7 +26,7 @@ if($_POST){
             </br></br></br>
             <div class="card">
                 <div class="card-header">
-                    LOGIN
+                    REGISTRATION
                 </div>
                 <div class="card-body">
 
@@ -59,22 +41,26 @@ if($_POST){
                     <form method="POST">
 
                     <div class = "form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" name="usuario" placeholder="Write your full name">
+                    </div>
 
-                    <label>User</label>
+                    <div class = "form-group">
+                    <label>E-mail</label>
+                    <input type="text" class="form-control" name="usuario" placeholder="Write your e-mail">
+                    </div>
 
+                    <div class = "form-group">
+                    <label>Username</label>
                     <input type="text" class="form-control" name="usuario" placeholder="Write your username">
-
                     </div>
 
                     <div class="form-group">
-
                     <label>Password</label>
                     <input type="password" class="form-control" name="contrasenia" placeholder="Enter your password">
-
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                    <a href="Registration.php" class="btn btn-primary">Sign up</a>
+                    <button type="submit" class="btn btn-primary">Sign up</button>
 
                     </form>
 
