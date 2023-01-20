@@ -30,23 +30,23 @@
                 </li>
 
                 <li class="nav__items">
-                    <a class="nav__links" href="./Contenido/Tecnologia.php">Technology</a>
+                    <a class="nav__links" href="./Contents/Technology.php">Technology</a>
                 </li>
 
                 <li class="nav__items">
-                    <a href="./Contenido/Mundo_Gamer.php" class="nav__links">Gaming World</a>
+                    <a href="./Contents/Gaming-World.php" class="nav__links">Gaming World</a>
                 </li>
 
                 <li class="nav__items">
-                    <a href="./Contenido/Musica.php" class="nav__links">Music</a>
+                    <a href="./Contents/Music.php" class="nav__links">Music</a>
                 </li>
 
                 <li class="nav__items">
-                    <a href="./Contenido/Moda.php" class="nav__links">Fashion</a>
+                    <a href="./Contents/Fashion.php" class="nav__links">Fashion</a>
                 </li>
 
                 <li class="nav__items">
-                    <a href="./Contenido/Emprendimientos.php" class="nav__links">Politics</a>
+                    <a href="./Contents/Politics.php" class="nav__links">Politics</a>
                 </li>
 
                 <img src="./Images/Svg/close.svg" alt="" class="nav__close">
