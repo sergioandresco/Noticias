@@ -90,15 +90,15 @@ if(isset($_POST['registro'])){
 */
 include "DB/Connection.php";
 $conexion=conectar();
-define("encryption_method", "AES-128-CBC");
-define("key", "sergio123");
+//define("encryption_method", "AES-128-CBC");
+//define("key", "sergio123");
 
 if(isset($_POST['registro'])){
 
     $nombre=$_POST["nombre"];
     $correo=$_POST["correo"];
     $usuario=$_POST["usuario"];
-    $contrasenia=encrypt($_POST["contrasenia"]);
+    $contrasenia=$_POST["contrasenia"];
 
     $existente=$conexion->query("SELECT * FROM usuarios WHERE nombre = '$nombre' or correo='$correo'");
 
@@ -134,18 +134,19 @@ if(isset($_POST['registro'])){
 
     }
 }
-
+/** 
 function encrypt($data) {
 
     $key = key;
     $plaintext = $data;
     $ivlen = openssl_cipher_iv_length($cipher = encryption_method);
     $iv = openssl_random_pseudo_bytes($ivlen);
-    $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+    $ciphertext_raw = base64_encode(openssl_encrypt($plaintext, $cipher, $key, 0, $iv)./base64_encode($iv));
     $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
     $ciphertext = base64_encode($iv . $hmac . $ciphertext_raw);
     return $ciphertext;
 }
+*/
 
 ?>
 

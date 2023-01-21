@@ -46,18 +46,19 @@ if(isset($_POST["submit"])){
 include "DB/Connection.php";
 $conexion=conectar();
 
-define("encryption_method", "AES-128-CBC");
-define("key", "sergio123");
+//define("encryption_method", "AES-128-CBC");
+//define("key", "sergio123");
 
 if(isset($_POST['submit'])){
 
     $usuario=$_POST["usuario"];
-    $contrasenia=decrypt($_POST["contrasenia"]);
+    $contrasenia=$_POST["contrasenia"];
 
     $queryregistrar = $conexion->prepare("SELECT * FROM usuarios WHERE nom_usuario = :usuario AND contrasenia = :contrasenia");
     $queryregistrar->bindParam(':usuario',$usuario, PDO::PARAM_STR);
     $queryregistrar->bindParam(':contrasenia',$contrasenia, PDO::PARAM_STR);
     $queryregistrar->execute();
+    
 
     if($queryregistrar->rowCount()>0){
 
@@ -74,7 +75,7 @@ if(isset($_POST['submit'])){
     }
 }
 
-
+/** 
 function decrypt($data) {
     $key = key;
     $c = base64_decode($data);
@@ -89,6 +90,7 @@ function decrypt($data) {
         return $original_plaintext;
     }
 }
+*/
 
 ?>
 
