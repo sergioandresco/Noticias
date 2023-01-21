@@ -1,6 +1,9 @@
 <?php
 
+//AQUÍ REALIZAREMOS LA CARGA DE NOTICIAS A LA BD
+
 $txtID=(isset($_POST['txtID']))?$_POST['txtID']:"";
+$txtCategoria=(isset($_POST['txtCategoria']))?$_POST['txtCategoria']:"";
 $txtTitulo=(isset($_POST['txtTitulo']))?$_POST['txtTitulo']:"";
 $txtFecha=(isset($_POST['txtFecha']))?$_POST['txtFecha']:"";
 $txtTexto=(isset($_POST['txtTexto']))?$_POST['txtTexto']:"";
@@ -14,10 +17,11 @@ switch($accion){
 
         case "Agregar":
 
-            $sentenciaSQL= $conexion->prepare("INSERT INTO articulos (categoria, titulo, descripcion, imagen, fecha) VALUES (:titulo_articulo, :fecha, :autor_articulo, :texto_articulo :imagen);");
-            $sentenciaSQL->bindParam(':titulo_articulo',$txtTitulo);
+            $sentenciaSQL= $conexion->prepare("INSERT INTO articulos (categoria, titulo, descripcion, imagen, fecha) VALUES (:categoria, :titulo, :descripcion, :imagen, :fecha);");
+            $sentenciaSQL->bindParam(':categoria',$txtCategoria);
+            $sentenciaSQL->bindParam(':titulo',$txtTitulo);
+            $sentenciaSQL->bindParam(':descripcion',$txtTexto);
             $sentenciaSQL->bindParam(':fecha',$txtFecha);
-            $sentenciaSQL->bindParam(':texto_articulo',$txtTexto);
 
 
             $fecha= new DateTime();
@@ -26,17 +30,17 @@ switch($accion){
             $tmpImagen=$_FILES["txtImagen"]["tmp_name"];
 
             if($tmpImagen!= ""){
-                move_uploaded_file($tmpImagen,"../../img/".$nombreArchivo);
+                move_uploaded_file($tmpImagen,"../Images/Imagenes-Noticias/".$nombreArchivo);
             }
             $sentenciaSQL->bindParam(':imagen',$nombreArchivo);
             $sentenciaSQL->execute();
-            header("Location:Articulos.php");
+            header("Location:News.php");
             break;
 
         case "Modificar":
 
-            $sentenciaSQL= $conexion->prepare("UPDATE articulos SET titulo_articulo=:titulo_articulo WHERE id=:id");
-            $sentenciaSQL->bindParam(':titulo_articulo',$txtTitulo);
+            $sentenciaSQL= $conexion->prepare("UPDATE articulos SET titulo=:titulo WHERE id=:id");
+            $sentenciaSQL->bindParam(':titulo',$txtTitulo);
             $sentenciaSQL->bindParam(':id',$txtID);
             $sentenciaSQL->execute();
 
@@ -46,7 +50,7 @@ switch($accion){
             $nombreArchivo = ($txtImagen!="")?$fecha->getTimestamp()."_".$_FILES["txtImagen"]["name"]:"imagen.jpg";
 
             $tmpImagen=$_FILES["txtImagen"]["tmp_name"];
-            move_uploaded_file($tmpImagen,"../../img/".$nombreArchivo);
+            move_uploaded_file($tmpImagen,"../Images/Imagenes-Noticias/".$nombreArchivo);
 
             $sentenciaSQL= $conexion->prepare("SELECT imagen FROM articulos WHERE id=:id");
             $sentenciaSQL->bindParam(':id',$txtID);
@@ -55,9 +59,9 @@ switch($accion){
 
             if(isset($Post["imagen"]) && ($Post["imagen"]!="imagen.jpg")){
 
-                if(file_exists("../../img/".$Post["imagen"])){
+                if(file_exists("../Images/Imagenes-Noticias/".$Post["imagen"])){
 
-                    unlink("../../img/".$Post["imagen"]);
+                    unlink("../Images/Imagenes-Noticias/".$Post["imagen"]);
                 }
 
             }
@@ -68,11 +72,11 @@ switch($accion){
             $sentenciaSQL->execute();
 
             }
-            header("Location:Articulos.php");
+            header("Location:News.php");
             break;
 
         case "Cancelar":
-            header("Location:Articulos.php");
+            header("Location:News.php");
             break;
 
         case "Seleccionar":
@@ -81,7 +85,7 @@ switch($accion){
             $sentenciaSQL->execute();
             $Post=$sentenciaSQL->fetch(PDO::FETCH_LAZY);
 
-            $txtTitulo=$Post['titulo_articulo'];
+            $txtTitulo=$Post['titulo'];
             $txtImagen=$Post['imagen'];
             break;
 
@@ -94,9 +98,9 @@ switch($accion){
 
             if(isset($Post["imagen"]) && ($Post["imagen"]!="imagen.jpg")){
 
-                if(file_exists("../../img/".$Post["imagen"])){
+                if(file_exists("../Images/Imagenes-Noticias/".$Post["imagen"])){
 
-                    unlink("../../img/".$Post["imagen"]);
+                    unlink("../Images/Imagenes-Noticias/".$Post["imagen"]);
                 }
 
             }
@@ -105,7 +109,7 @@ switch($accion){
             $sentenciaSQL->bindParam(':id',$txtID);
             $sentenciaSQL->execute();
 
-            header("Location:Articulos.php");
+            header("Location:News.php");
             break;
 
 }
@@ -128,11 +132,11 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../Style-Sheets/Normalize.css">
     <link rel="stylesheet" href="../Style-Sheets/Style.css"> 
 
-    <title>Administrador</title>
+    <title>Admin</title>
 
 </head>
 <body>
-<?php $url= "http://".$_SERVER['HTTP_HOST']."/SERCHTEC-GITHUB/Index.php" ?>
+<?php $url= "http://".$_SERVER['HTTP_HOST']."/Noticias/Index.php" ?>
 
 <header class="hero">
         <nav class="nav container">
@@ -188,7 +192,7 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
         <form method="POST" enctype="multipart/form-data">
 
-        Select the category in which you are going to add the news<select class = "form-control" name = "txtCarrera" required><br>
+        Select the category in which you are going to add the news<select class = "form-control" name = "txtCategoria" required><br>
 
             <option value = "Tecnologia">Technology</option>
             <option value = "Gamer">Gaming World</option>
@@ -226,7 +230,7 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
     <?php if($txtImagen!=""){ ?>
 
-    <img src="../../img/<?php echo $txtImagen;?>" width="50" alt="" srcset="">
+    <img src="../Images/Imagenes-Noticias/<?php echo $txtImagen;?>" width="50" alt="" srcset="">
 
     <?php } ?>
 
@@ -258,6 +262,7 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
             <th>Title</th>
             <th>Date</th>
             <th>Text</th>
+            <th>Image</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -265,16 +270,13 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach($listaPost as $post){ ?>
         <tr>
             <td><?php echo $post['id']; ?></td>
-            <td><?php echo $post['titulo_articulo']; ?></td>
             <td><?php echo $post['fecha']; ?></td>
-            <td><?php echo $post['texto_articulo']; ?></td>
+            <td><?php echo $post['titulo']; ?></td>
+            <td><?php echo $post['descripcion']; ?></td>
             <td>
-            <audio controls>
-            <source src="../../img/<?php echo $post['imagen']; ?>" width="50" alt="" srcset="">
-            </audio>
-
-
-
+            
+            <img src="../Images/Imagenes-Noticias/<?php echo $post['imagen']; ?>" width="50" alt="" srcset="">
+            
             </td>
 
             <td>
