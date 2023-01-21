@@ -1,14 +1,26 @@
 <?php
 
-$host="localhost";
-$usuario="root";
-$bd="noticenter";
-$contrasenia="";
+function conectar(){
 
-$conexion= mysqli_connect($host,$usuario,$contrasenia,$bd);
+    $host="localhost";
+    $bd="noticenter";
+    $usuario="root";
+    $contrasenia="";
 
-if(!$conexion){
-    die("Conexión fallida");
+    try {
+
+        $conexion=new PDO("mysql:host=$host;dbname=$bd",$usuario,$contrasenia);
+        return $conexion;
+    
+    } catch (PDOException $error) {
+    
+        echo "No se pudo conectar la BD".$error->getMessage();
+    }
+
+
 }
+
+ 
+
 
 ?>

@@ -8,6 +8,7 @@ $txtImagen=(isset($_FILES['txtImagen']['name']))?$_FILES['txtImagen']['name']:""
 $accion=(isset($_POST['accion']))?$_POST['accion']:"";
 
 include('../DB/Connection.php');
+$conexion=conectar();
 
 switch($accion){
 
@@ -154,7 +155,7 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                 </li>
 
                 <li class="nav__items">
-                    <a href="./Cerrar.php" class="nav__links">Log Out</a>
+                    <a href="./Log-Out.php" class="nav__links">Log Out</a>
                 </li>
 
 

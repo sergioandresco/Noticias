@@ -1,5 +1,5 @@
 <?php
-
+/** 
 include "DB/Connection.php";
 error_reporting(0);
 session_start();
@@ -37,7 +37,115 @@ if(isset($_POST["registro"])){
     }
   
 }
+*/
+/** 
+include "DB/Connection.php";
+error_reporting(0);
 
+define("encryption_method", "AES-128-CBC");
+define("key", "sergio123");
+
+$nombre=$_POST["nombre"];
+$correo=$_POST["correo"];
+$usuario=$_POST["usuario"];
+$contrasenia=$_POST["contrasenia"];
+$pass_fuerte = encrypt($contrasenia);
+
+if(isset($_POST['registro'])){
+
+    $queryregistrar = $conexion->prepare("INSERT INTO usuarios(nombre, correo, nom_usuario, contrasenia) VALUES (:nombre, :correo, :usuario, :contrasenia)");
+
+    
+    $queryregistrar->bindParam(':nombre',$nombre, PDO::PARAM_STR);
+    $queryregistrar->bindParam(':correo',$correo, PDO::PARAM_STR);
+    $queryregistrar->bindParam(':usuario',$usuario, PDO::PARAM_STR);
+    $queryregistrar->bindParam(':pass_fuerte',$pass_fuerte, PDO::PARAM_STR);
+
+    $ejecutar = $queryregistrar->execute();
+    
+    if($ejecutar){
+        
+        echo "<script>window.location='Main.php'</script>";
+    }
+    
+    
+    $pass_fuerte = encrypt($contrasenia);
+    $queryregistrar = $conexion->prepare("INSERT INTO usuarios(nombre, correo, nom_usuario, contrasenia) VALUES ('$nombre','$correo','$usuario','$pass_fuerte')");
+    
+    if(mysqli_query($conexion,$queryregistrar)){
+
+        session_start();
+
+        $_SESSION['nombre'] = $nombre;
+        $_SESSION['usuario']   = $usuario;
+
+        echo "<script>window.location='Main.php'</script>";
+
+    }else{
+        echo "Error";
+    }
+}
+
+}
+*/
+include "DB/Connection.php";
+$conexion=conectar();
+define("encryption_method", "AES-128-CBC");
+define("key", "sergio123");
+
+if(isset($_POST['registro'])){
+
+    $nombre=$_POST["nombre"];
+    $correo=$_POST["correo"];
+    $usuario=$_POST["usuario"];
+    $contrasenia=encrypt($_POST["contrasenia"]);
+
+    $existente=$conexion->query("SELECT * FROM usuarios WHERE nombre = '$nombre' or correo='$correo'");
+
+    if($existente->rowCount()>0){
+
+        echo "Nombre de usuario o correo ya existe.";
+
+    }else{
+
+        try{
+
+            $queryregistrar = $conexion->prepare("INSERT INTO usuarios(nombre, correo, nom_usuario, contrasenia) VALUES (:nombre, :correo, :usuario, :contrasenia)");
+            $queryregistrar->bindParam(':nombre',$nombre, PDO::PARAM_STR);
+            $queryregistrar->bindParam(':correo',$correo, PDO::PARAM_STR);
+            $queryregistrar->bindParam(':usuario',$usuario, PDO::PARAM_STR);
+            $queryregistrar->bindParam(':contrasenia',$contrasenia, PDO::PARAM_STR);
+
+            $ejecutar = $queryregistrar->execute();
+
+            session_start();
+
+            $_SESSION['nombre'] = $nombre;
+            $_SESSION['usuario']   = $usuario;
+
+            echo "<script>window.location='Main.php'</script>";
+        }
+
+        catch (PDOException $error){
+
+            print "ERROR:".$error->getMessage();
+            echo "ERROR DE REGISTRO";
+        }
+
+    }
+}
+
+function encrypt($data) {
+
+    $key = key;
+    $plaintext = $data;
+    $ivlen = openssl_cipher_iv_length($cipher = encryption_method);
+    $iv = openssl_random_pseudo_bytes($ivlen);
+    $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+    $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+    $ciphertext = base64_encode($iv . $hmac . $ciphertext_raw);
+    return $ciphertext;
+}
 
 ?>
 
@@ -91,10 +199,10 @@ if(isset($_POST["registro"])){
 
                     <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" name="contrasenia" placeholder="Enter your password">
+                    <input type="password" class="form-control" name="contrasenia" placeholder="Enter your password" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" value="Registrar" name="registro">Sign up</button>
+                    <input type="submit" class="btn btn-primary" value="Sign up" name="registro">
                     <a href="./Login.php" class="btn btn-primary">Log in</a>
 
                         </div>

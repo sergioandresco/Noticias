@@ -1,49 +1,94 @@
 <?php
-
+/** 
 include "DB/Connection.php";
 session_start();
 error_reporting(0);
 
-/** 
-if(isset($_SESSION["usuario"])){
-    header('Location: Main.php');
-}
+define("encryption_method", "AES-128-CBC");
+define("key", "sergio123");
+
+$usuario=$_POST["usuario"];
+$contrasenia=$_POST["contrasenia"];
 
 if(isset($_POST["submit"])){
-    $usuario=$_POST["usuario"];
-    $contrasenia=md5($_POST["contrasenia"]);
 
-    $sql = "SELECT * FROM usuarios WHERE nom_usuario='$usuario' AND contrasenia='$contrasenia'";
-    $result = mysqli_query($conexion, $sql);
+    $queryusuario = $conexion->query("SELECT * FROM usuarios WHERE nom_usuario = '$usuario'");
+    $buscarpass = $queryusuario -> fetch(PDO::FETCH_NUM);
 
-    if($result->num_rows > 0){
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION['usuario'] = $row['usuario'];
-        header('Location: Main.php');
-    }else{
-        echo '<div class="alert">La contraseña es incorrecta</div>';
-        header('Location: Login.php');
+    if($queryusuario){
+
+        $decode_pass = decrypt($buscarpass[4]);
+        $nombre = $buscarpass[1];
+
+        if ($decode_pass == $contrasenia) {
+            
+            session_start();
+
+            $_SESSION['nombre'] = $nombre;
+            $_SESSION['usuario']   = $usuario;
+
+            echo "<script>window.location='Main.php'</script>";
+
+        } else {
+
+            echo '<div class="alert">Contraseña incorrecta</div>';
+        }
+
+        echo "<script>window.location='Main.php'</script>";
+
+    } else {
+
+        echo '<div class="alert">Usuario incorrecto</div>';
     }
+    
 }
 */
-$usuario=$_POST["usuario"];
-$contrasenia=md5($_POST["contrasenia"]);
+include "DB/Connection.php";
+$conexion=conectar();
 
-if(isset($_POST["submit"])){
-    $queryusuario = mysqli_query($conexion, "SELECT * FROM login WHERE nom_usuario = '$usuario'");
-    $nr = mysqli_num_rows($queryusuario);
-    $buscarpass = mysqli_fetch_array($queryusuario);
+define("encryption_method", "AES-128-CBC");
+define("key", "sergio123");
 
-    if($result->num_rows > 0){
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION['usuario'] = $row['usuario'];
-        header('Location: Main.php');
+if(isset($_POST['submit'])){
+
+    $usuario=$_POST["usuario"];
+    $contrasenia=decrypt($_POST["contrasenia"]);
+
+    $queryregistrar = $conexion->prepare("SELECT * FROM usuarios WHERE nom_usuario = :usuario AND contrasenia = :contrasenia");
+    $queryregistrar->bindParam(':usuario',$usuario, PDO::PARAM_STR);
+    $queryregistrar->bindParam(':contrasenia',$contrasenia, PDO::PARAM_STR);
+    $queryregistrar->execute();
+
+    if($queryregistrar->rowCount()>0){
+
+
+        session_start();
+
+        $_SESSION['nombre'] = $nombre;
+        $_SESSION['usuario'] = $usuario;
+
+        echo "<script>window.location='Main.php'</script>";
+
     }else{
-        echo '<div class="alert">La contraseña es incorrecta</div>';
-        header('Location: Login.php');
+        echo "Error de registro";
     }
 }
-        
+
+
+function decrypt($data) {
+    $key = key;
+    $c = base64_decode($data);
+    $ivlen = openssl_cipher_iv_length($cipher = encryption_method);
+    $iv = substr($c, 0, $ivlen);
+    $hmac = substr($c, $ivlen, $sha2len = 32);
+    $ciphertext_raw = substr($c, $ivlen + $sha2len);
+    $original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+    $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+
+    if (hash_equals($hmac, $calcmac)){
+        return $original_plaintext;
+    }
+}
 
 ?>
 
@@ -96,7 +141,7 @@ if(isset($_POST["submit"])){
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary" name="submit">Log in</button>
+                    <input type="submit" class="btn btn-primary" name="submit" value="Log in">
                     <a href="./Registration.php" class="btn btn-primary">Sign up</a>
 
                     </form>
