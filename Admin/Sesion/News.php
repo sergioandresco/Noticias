@@ -151,7 +151,7 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
             <ul class="nav__link nav__link--menu">
 
                 <li class="nav__items">
-                    <a class="nav__links" href="../Inicio.php">Home Administrator</a>
+                    <a class="nav__links" href="../Main.php">Home Administrator</a>
                 </li>
 
                 <li class="nav__items">
@@ -252,61 +252,58 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 </div>
+    <div class="tabla_contenedor">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Text</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
 
-<div class="col-md-7">
-    <div class="muestra_noticias">
+            <tbody>
+                <?php foreach($listaPost as $post){ ?>
+                    <tr>
+                        <td><?php echo $post['id']; ?></td>
+                        <td><?php echo $post['fecha']; ?></td>
+                        <td><?php echo $post['titulo']; ?></td>
+                        <td><?php echo $post['categoria']; ?></td>
+                        <td><?php echo $post['descripcion']; ?></td>
+                        <td>
+                            <img src="../Images/Imagenes-Noticias/<?php echo $post['imagen']; ?>" width="50" alt="" srcset="">
+                        </td>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Text</th>
-            <th>Image</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($listaPost as $post){ ?>
-        <tr>
-            <td><?php echo $post['id']; ?></td>
-            <td><?php echo $post['fecha']; ?></td>
-            <td><?php echo $post['titulo']; ?></td>
-            <td><?php echo $post['categoria']; ?></td>
-            <td><?php echo $post['descripcion']; ?></td>
-            <td>
-            
-            <img src="../Images/Imagenes-Noticias/<?php echo $post['imagen']; ?>" width="50" alt="" srcset="">
-            
-            </td>
+                        <td>
 
-            <td>
 
-            <form method="post">
+                            <form method="post">
 
-                <input type="hidden" name="txtID" id="txtID" value="<?php echo $post['id']; ?>"/>
 
-                <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary"/>
+                                <input type="hidden" name="txtID" id="txtID" value="<?php echo $post['id']; ?>"/>
 
-                <input type="submit" name="accion" value="Borrar" class="btn btn-danger"/>
+                                <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary"/>
+
+                                <input type="submit" name="accion" value="Borrar" class="btn btn-danger"/>
 
 
 
-            </form>
+                            </form>
 
-            </td>
+                        </td>
 
         </tr>
         <?php }?>
 
-    </tbody>
-</table>
+            </tbody>
+        </table>
 
-</div>
-</div>
-
+    </div>
+   
 
 </body>
 </html>

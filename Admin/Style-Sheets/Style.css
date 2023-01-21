@@ -10,6 +10,29 @@ body{
 
 }
 
+.tabla_contenedor{
+    margin-bottom: 100px;
+}
+
+table{
+    background-color: white;
+    border-collapse: collapse;
+}
+
+th, td{
+    border: solid 1px black;
+    padding: 20px;
+}
+
+thead{
+    background-color: lightseagreen;
+    border-bottom: solid 5px black;
+}
+
+tr:nth-child(even){
+    background-color: lightblue;
+}
+
 .container__fondo{
     content: "";
     position: absolute;

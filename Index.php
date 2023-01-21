@@ -67,6 +67,16 @@
         </section>
 
     </header>
+    
+    <div style="text-align:center;padding:1em 0;">
+
+
+        <h4><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/3688689"><span style="color:gray;">Hora actual en</span><br />Bogotá, Colombia</a></h4><iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=small&timezone=America%2FBogota" width="100%" height="90" frameborder="0" seamless></iframe>
+
+        <h4><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/5128581"><span style="color:gray;">Hora actual en</span><br />New York City, Estados Unidos (USA)</a></h4> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=small&timezone=America%2FNew_York" width="100%" height="90" frameborder="0" seamless></iframe>
+
+
+    </div>
 
     <main>
         <section class="container about">
