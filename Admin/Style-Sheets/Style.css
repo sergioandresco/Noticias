@@ -11,10 +11,12 @@ body{
 }
 
 .tabla_contenedor{
-    margin-bottom: 100px;
+    margin-top: 40px;
+    margin-left: 20px;
 }
 
 table{
+    width: 80%;
     background-color: white;
     border-collapse: collapse;
 }

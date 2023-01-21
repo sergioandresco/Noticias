@@ -180,129 +180,135 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
     </header>
 
-<div class="col-md-5">
+<center>
+    
+    <div class="col-md-5">
 
-    <div class="card">
+        <div class="card">
 
-        <div class="card-header">
-            News data
+            <div class="card-header">
+                News data
+            </div>
+
+            <div class="card-body">
+
+            <form method="POST" enctype="multipart/form-data">
+
+            Select the category in which you are going to add the news<select class = "form-control" name = "txtCategoria" required><br>
+
+                <option value = "Tecnologia">Technology</option>
+                <option value = "Gamer">Gaming World</option>
+                <option value = "Musica">Music</option>
+                <option value = "Moda">Fashion</option>
+                <option value = "Politica">Politics</option>
+
+            </select></br>
+
+        <div class = "form-group">
+        <label for="txtID">ID: </label>
+        <input type="text" required readonly  class="form-control" value="<?php echo $txtID; ?>" name="txtID" id="txtID" placeholder="ID">
         </div>
 
-        <div class="card-body">
+        <div class = "form-group">
+        <label for="txtTitulo">Title of the news:</label>
+        <input type="text" required class="form-control" value="<?php echo $txtTitulo; ?>" name="txtTitulo" id="txtTitulo" placeholder="Enter the title of the news">
+        </div>
 
-        <form method="POST" enctype="multipart/form-data">
+        <div class = "form-group">
+        <label for="txtFecha">Drafting date:</label>
+        <input type="text" required class="form-control" value="<?php echo $txtFecha; ?>" name="txtFecha" id="txtFecha" placeholder="Enter the date of writing the news">
+        </div>
 
-        Select the category in which you are going to add the news<select class = "form-control" name = "txtCategoria" required><br>
+        <div class = "form-group">
+        <label for="txtTexto">News text:</label>
+        <textarea type="text" required class="form-control" value="<?php echo $txtTexto; ?>" name="txtTexto" id="txtTexto" placeholder="Enter the text of the news"></textarea>
+        </div>
 
-            <option value = "Tecnologia">Technology</option>
-            <option value = "Gamer">Gaming World</option>
-            <option value = "Musica">Music</option>
-            <option value = "Moda">Fashion</option>
-            <option value = "Politica">Politics</option>
+        <div class = "form-group">
 
-        </select></br>
+        <label for="txtImagen">News image</label>
 
-    <div class = "form-group">
-    <label for="txtID">ID: </label>
-    <input type="text" required readonly  class="form-control" value="<?php echo $txtID; ?>" name="txtID" id="txtID" placeholder="ID">
-    </div>
+    </br>
 
-    <div class = "form-group">
-    <label for="txtTitulo">Title of the news:</label>
-    <input type="text" required class="form-control" value="<?php echo $txtTitulo; ?>" name="txtTitulo" id="txtTitulo" placeholder="Enter the title of the news">
-    </div>
+        <?php if($txtImagen!=""){ ?>
 
-    <div class = "form-group">
-    <label for="txtFecha">Drafting date:</label>
-    <input type="text" required class="form-control" value="<?php echo $txtFecha; ?>" name="txtFecha" id="txtFecha" placeholder="Enter the date of writing the news">
-    </div>
+        <img src="../Images/Imagenes-Noticias/<?php echo $txtImagen;?>" width="50" alt="" srcset="">
 
-    <div class = "form-group">
-    <label for="txtTexto">News text:</label>
-    <textarea type="text" required class="form-control" value="<?php echo $txtTexto; ?>" name="txtTexto" id="txtTexto" placeholder="Enter the text of the news"></textarea>
-    </div>
+        <?php } ?>
 
-    <div class = "form-group">
+        <input type="file" class="form-control" name="txtImagen" id="txtImagen" placeholder="Ingrese el nombre del usuario">
+        </div>
 
-    <label for="txtImagen">News image</label>
+        <div class="btn-group" role="group" aria-label="">
 
-</br>
+        <button type="submit" name="accion" <?php echo ($accion=="Seleccionar")?"disabled":"";?>value="Agregar" class="btn btn-success">Add</button>
+        <button type="submit" name="accion" <?php echo ($accion!="Seleccionar")?"disabled":"";?>value="Modificar" class="btn btn-warning">Change</button>
+        <button type="submit" name="accion" <?php echo ($accion!="Seleccionar")?"disabled":"";?>value="Cancelar" class="btn btn-info">Cancel</button>
 
-    <?php if($txtImagen!=""){ ?>
+        </div>
 
-    <img src="../Images/Imagenes-Noticias/<?php echo $txtImagen;?>" width="50" alt="" srcset="">
+        </form>
 
-    <?php } ?>
-
-    <input type="file" class="form-control" name="txtImagen" id="txtImagen" placeholder="Ingrese el nombre del usuario">
-    </div>
-
-    <div class="btn-group" role="group" aria-label="">
-
-    <button type="submit" name="accion" <?php echo ($accion=="Seleccionar")?"disabled":"";?>value="Agregar" class="btn btn-success">Add</button>
-    <button type="submit" name="accion" <?php echo ($accion!="Seleccionar")?"disabled":"";?>value="Modificar" class="btn btn-warning">Change</button>
-    <button type="submit" name="accion" <?php echo ($accion!="Seleccionar")?"disabled":"";?>value="Cancelar" class="btn btn-info">Cancel</button>
-
-    </div>
-
-    </form>
+            </div>
 
         </div>
 
     </div>
+    </center>
 
-</div>
-    <div class="tabla_contenedor">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Text</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <?php foreach($listaPost as $post){ ?>
+    <center>
+        <div class="tabla_contenedor">
+            <table>
+                <thead>
                     <tr>
-                        <td><?php echo $post['id']; ?></td>
-                        <td><?php echo $post['fecha']; ?></td>
-                        <td><?php echo $post['titulo']; ?></td>
-                        <td><?php echo $post['categoria']; ?></td>
-                        <td><?php echo $post['descripcion']; ?></td>
-                        <td>
-                            <img src="../Images/Imagenes-Noticias/<?php echo $post['imagen']; ?>" width="50" alt="" srcset="">
-                        </td>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Text</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
-                        <td>
+                <tbody>
+                    <?php foreach($listaPost as $post){ ?>
+                        <tr>
+                            <td><?php echo $post['id']; ?></td>
+                            <td><?php echo $post['fecha']; ?></td>
+                            <td><?php echo $post['titulo']; ?></td>
+                            <td><?php echo $post['categoria']; ?></td>
+                            <td><?php echo $post['descripcion']; ?></td>
+                            <td>
+                                <img src="../Images/Imagenes-Noticias/<?php echo $post['imagen']; ?>" width="50" alt="" srcset="">
+                            </td>
+
+                            <td>
 
 
-                            <form method="post">
+                                <form method="post">
 
 
-                                <input type="hidden" name="txtID" id="txtID" value="<?php echo $post['id']; ?>"/>
+                                    <input type="hidden" name="txtID" id="txtID" value="<?php echo $post['id']; ?>"/>
 
-                                <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary"/>
+                                    <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary"/>
 
-                                <input type="submit" name="accion" value="Borrar" class="btn btn-danger"/>
+                                    <input type="submit" name="accion" value="Borrar" class="btn btn-danger"/>
 
 
 
-                            </form>
+                                </form>
 
-                        </td>
+                            </td>
 
-        </tr>
-        <?php }?>
+                        </tr>
+                <?php }?>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-    </div>
+        </div>
+    </center>
    
 
 </body>
