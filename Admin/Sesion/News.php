@@ -254,13 +254,15 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <div class="col-md-7">
+    <div class="muestra_noticias">
 
 <table class="table table-bordered">
     <thead>
         <tr>
             <th>ID</th>
-            <th>Title</th>
             <th>Date</th>
+            <th>Title</th>
+            <th>Category</th>
             <th>Text</th>
             <th>Image</th>
             <th>Actions</th>
@@ -272,6 +274,7 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
             <td><?php echo $post['id']; ?></td>
             <td><?php echo $post['fecha']; ?></td>
             <td><?php echo $post['titulo']; ?></td>
+            <td><?php echo $post['categoria']; ?></td>
             <td><?php echo $post['descripcion']; ?></td>
             <td>
             
@@ -301,6 +304,7 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
     </tbody>
 </table>
 
+</div>
 </div>
 
 

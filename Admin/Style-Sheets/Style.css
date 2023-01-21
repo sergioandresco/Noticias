@@ -431,6 +431,11 @@ body{
     color: green;
 }
 
+.muestra_noticias{
+    position: relative;
+    left: -20px;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width:800px){

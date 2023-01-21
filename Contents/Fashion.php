@@ -1,3 +1,13 @@
+<?php
+include('../Admin/DB/Connection.php');
+$conexion=conectar();
+
+$sentenciaSQL= $conexion->prepare("SELECT * FROM articulos WHERE categoria = 'Moda'");
+$sentenciaSQL->execute();
+$listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,6 +71,28 @@
         </section>
 
     </header>
+
+    <?php foreach($listaPost as $Post){?>
+
+        <div class="Imagen-noticia">
+            <img src="../Admin/Images/Imagenes-noticias/<?php echo $Post['imagen']; ?>" alt="">
+        </div>
+
+        <div class="Titulo-noticia">
+            <h4><?php echo $Post['titulo']; ?></h4>
+        </div>
+
+        <div class="Fecha-noticia">
+            <h4><?php echo $Post['fecha']; ?></h4>
+        </div>
+
+        <div class="Texto-noticia">
+            <p><?php echo $Post['descripcion']; ?></p>
+        </div>
+
+
+
+    <?php }?>
 
     <script src="../Animation/Menu.js"></script>
 
