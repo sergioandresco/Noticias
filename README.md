@@ -6,6 +6,7 @@
 <h3>El funcionamiento de NotiCenter es el siguiente:</h3>
 <a href="https://youtu.be/c5lQvcSYV2w">Video de funcionamiento.</a>
 
+- Toda la plataforma es Responsive, por lo cual no pierde su diseño en cualquiér dispositivo, ya sea pc, o telefono movil.
 - Se cuenta con un Index principal, el cual es el menu principal de la pagina, endonde se explica cual es el funcionamiento de la pagina, que se podrá encontrar en ella, etc.
 - Un barra superior de menu, en la cual se podrá encontrár las diversas categorías de noticias con las que cuenta el noticiero web.
 - Un footer el cual cuenta con la opción de suscribirse para poder recibir nuevas noticias vía e-mail.
