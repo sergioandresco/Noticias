@@ -17,7 +17,11 @@
 - El boton agregar, añadira la nueva noticia a la BD de la pagina, enviará la información a la pagina principal y mostrará lo ingresado en pantalla.
 - El desarrollo cuenta con una BD realizada con MYSQL, con 2 tablas, una para los usuarios administradores, donde se ingresarán los nuevos usuarios registrados, y en la cual se realizará el SELECT respectivo para poder consultar el LOGIN y permitir el ingreso, y otra tabla para las noticias, para la cual se registrará todos los datos de la nueva noticia, y a la cual se le realizará el SELECT para poder mostrar la noticia en el portal principal de las noticias.
 
-El modelo de la BD lo pueden encontrar clickeando <a href="">aquí.</a>
+El modelo de la BD lo pueden observar a continuación.
+
+<div align="center">
+<a> <img src="[https://user-images.githubusercontent.com/43445037/213896108-59d33c87-4f0f-4a02-aa2f-1410e199ffe0.png](https://user-images.githubusercontent.com/43445037/213896748-cd78c4b4-5cda-4b6d-b606-e2f9df95c5cb.png)" alt="gif2" width="500" height="300"/> </a>
+</div>
 
 <h3 align"left">Los lengujes de programación que se utilizarón son los siguientes:</h3>
 <p align="left"> <a href="https://getbootstrap.com" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a><a href="https://www.php.net" target="_blank"> <img src="https://user-images.githubusercontent.com/43445037/174460678-8255e8b1-9230-4969-ac1b-a3c3245e4d48.png" alt="php" width="50" height="40"/> </a> <a href="https://www.javascript.com" target="_blank"> <img src="https://user-images.githubusercontent.com/43445037/213895834-d3a3617d-3ceb-4725-8bdc-1c7ad196703f.png" alt="js" width="50" height="40"/></a>
