@@ -20,7 +20,7 @@
 El modelo de la BD lo pueden observar a continuación.
 
 <div align="center">
-<a> <img src="https://user-images.githubusercontent.com/43445037/213896771-cf702ede-6991-426c-ac4c-26552d4b4c69.png" alt="gif2" width="500" height="300"/> </a>
+<a> <img src="https://user-images.githubusercontent.com/43445037/213896771-cf702ede-6991-426c-ac4c-26552d4b4c69.png" alt="gif2" width="601" height="701"/> </a>
 </div>
 
 <h3 align"left">Los lengujes de programación que se utilizarón son los siguientes:</h3>
