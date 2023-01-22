@@ -68,17 +68,17 @@
 
     </header>
     
-    <div style="text-align:center;padding:1em 0;">
+    <div class="horas">
 
+        <div style="text-align:center;padding:1em 0;">
 
-        <h4><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/3688689"><span style="color:gray;">Hora actual en</span><br />Bogotá, Colombia</a></h4><iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=small&timezone=America%2FBogota" width="100%" height="90" frameborder="0" seamless></iframe>
+        <h2><a style="text-decoration:none; color:black;" href="https://www.zeitverschiebung.net/es/city/3688689"><span style="color:black;">Hora actual en</span><br />Bogotá, Colombia</a></h2> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=large&timezone=America%2FBogota" width="100%" height="140" frameborder="0" seamless></iframe>
 
-        <h4><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/5128581"><span style="color:gray;">Hora actual en</span><br />New York City, Estados Unidos (USA)</a></h4> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=small&timezone=America%2FNew_York" width="100%" height="90" frameborder="0" seamless></iframe>
-
-
+        </div>
     </div>
 
     <main>
+        <div class="container_about">
         <section class="container about">
             <h2 class="subtitle">What can you see in this newscast?</h2>
             <p class="about__paragraph">Articles, news, and relevant information related to technology, the gaming world, music, fashion trends, and additionally all the political news that exists. </p>
@@ -116,6 +116,7 @@
 
             </div>
         </section>
+        </div>
 
         <section class="creador">
             <div class="creador__container container">
@@ -130,7 +131,7 @@
                 </section>
             </div>
         </section>
-
+        <div class="container_preguntas">
         <section class="questions">
             <section class="question container">
                 <h2 class="subtitle">Frequent questions</h2>
@@ -163,6 +164,7 @@
                 </section>
             </section>
         </section>
+        </div>
 
 
     </main>
@@ -176,27 +178,27 @@
 
                 <ul class="nav__link nav__link--footer">
                     <li class="nav__items">
-                        <a href="#" class="nav__links">Main Menu</a>
+                        <a href="Index.php" class="nav__links">Main Menu</a>
                     </li>
 
                     <li class="nav__items">
-                        <a href="#" class="nav__links">Technology</a>
+                        <a href="./Contents/Technology.php" class="nav__links">Technology</a>
                     </li>
 
                     <li class="nav__items">
-                        <a href="#" class="nav__links">Gaming World</a>
+                        <a href="./Contents/Gaming-World.php" class="nav__links">Gaming World</a>
                     </li>
 
                     <li class="nav__items">
-                        <a href="#" class="nav__links">Music</a>
+                        <a href="./Contents/Music.php" class="nav__links">Music</a>
                     </li>
 
                     <li class="nav__items">
-                        <a href="#" class="nav__links">Fashion</a>
+                        <a href="./Contents/Fashion.php" class="nav__links">Fashion</a>
                     </li>
 
                     <li class="nav__items">
-                        <a href="#" class="nav__links">Politics</a>
+                        <a href="./Contents/Politics.php" class="nav__links">Politics</a>
                     </li>
                 </ul>
             </nav>

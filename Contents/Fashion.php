@@ -72,27 +72,22 @@ $listaPost=$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
     </header>
 
-    <?php foreach($listaPost as $Post){?>
-
-        <div class="Imagen-noticia">
-            <img src="../Admin/Images/Imagenes-noticias/<?php echo $Post['imagen']; ?>" alt="">
+    <section id="news-feed" class="container">
+        
+        <div class="news-block">
+            
+            <div class="left-block">
+                <article>
+                <?php foreach($listaPost as $Post){?>
+                    <h1 class="titulo_noticias"><?php echo $Post['titulo']; ?></h1>
+                    <h2 class="fecha_noticias"><?php echo $Post['fecha']; ?></h2>
+                    <p class="texto_noticias"><?php echo $Post['descripcion']; ?></p>
+                    <img class="imagen_noticia" src="../Admin/Images/Imagenes-noticias/<?php echo $Post['imagen']; ?>" alt="">
+                    <?php }?>
+                </article>
+            </div>
         </div>
-
-        <div class="Titulo-noticia">
-            <h4><?php echo $Post['titulo']; ?></h4>
-        </div>
-
-        <div class="Fecha-noticia">
-            <h4><?php echo $Post['fecha']; ?></h4>
-        </div>
-
-        <div class="Texto-noticia">
-            <p><?php echo $Post['descripcion']; ?></p>
-        </div>
-
-
-
-    <?php }?>
+        </section>
 
     <script src="../Animation/Menu.js"></script>
 
