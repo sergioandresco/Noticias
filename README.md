@@ -15,7 +15,7 @@
 - Para cargar una nueva noticia a la pagina principal del noticiero, y a la BD, se solicita llenar un formulario, donde irán todos los datos de la nueva noticia (Titulo, fecha de redacción, el texto de la noticia, y la imagen de la noticia).
 - Una vez diligenciado el formulario, el usuario tiene la opción de agregar la nueva noticia, con el boton agregar.
 - El boton agregar, añadira la nueva noticia a la BD de la pagina, enviará la información a la pagina principal y mostrará lo ingresado en pantalla.
-- El desarrollo cuenta con una BD, con 2 tablas, una para los usuarios administradores, y una para las noticias.
+- El desarrollo cuenta con una BD realizada con MYSQL, con 2 tablas, una para los usuarios administradores, donde se ingresarán los nuevos usuarios registrados, y en la cual se realizará el SELECT respectivo para poder consultar el LOGIN y permitir el ingreso, y otra tabla para las noticias, para la cual se registrará todos los datos de la nueva noticia, y a la cual se le realizará el SELECT para poder mostrar la noticia en el portal principal de las noticias.
 
 El modelo de la BD lo pueden encontrar clickeando <a href="">aquí.</a>
 
